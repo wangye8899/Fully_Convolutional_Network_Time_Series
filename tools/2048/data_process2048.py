@@ -45,7 +45,7 @@ def generate_vector(file,data_list,label_list,num,num_file,j):
         # print(len(data_list))
         # print(data_list[127])
         # print(i)
-        if i>=15 and i<=496:
+        if i>=15 and i<=2032:
             # print(i)
             pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],\
                 data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[i+1]-data_list[i],data_list[i+2]-data_list[i],data_list[i+3]-data_list[i],\
@@ -135,95 +135,95 @@ def generate_vector(file,data_list,label_list,num,num_file,j):
             
         # 处理后四个
             
-        elif i==497:
-            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[498]-data_list[i],data_list[499]-data_list[i],data_list[500]-data_list[i],data_list[501]-data_list[i],data_list[502]-data_list[i],data_list[503]-data_list[i],data_list[504]-data_list[i],data_list[505]-data_list[i],data_list[506]-data_list[i],data_list[507]-data_list[i],data_list[508]-data_list[i],data_list[509]-data_list[i],data_list[510]-data_list[i],data_list[511]-data_list[i],0])
+        elif i==2033:
+            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[2034]-data_list[i],data_list[2035]-data_list[i],data_list[2036]-data_list[i],data_list[2037]-data_list[i],data_list[2038]-data_list[i],data_list[2039]-data_list[i],data_list[2040]-data_list[i],data_list[2041]-data_list[i],data_list[2042]-data_list[i],data_list[2043]-data_list[i],data_list[2044]-data_list[i],data_list[2045]-data_list[i],data_list[2046]-data_list[i],data_list[2047]-data_list[i],0])
             if len(pri_[i])!=30:
                 print(i)
             
-        elif i==498:
-            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[499]-data_list[i],data_list[500]-data_list[i],data_list[501]-data_list[i],data_list[502]-data_list[i],data_list[503]-data_list[i],data_list[504]-data_list[i],data_list[505]-data_list[i],data_list[506]-data_list[i],data_list[507]-data_list[i],data_list[508]-data_list[i],data_list[509]-data_list[i],data_list[510]-data_list[i],data_list[511]-data_list[i],0,0])
+        elif i==2034:
+            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[2035]-data_list[i],data_list[2036]-data_list[i],data_list[2037]-data_list[i],data_list[2038]-data_list[i],data_list[2039]-data_list[i],data_list[2040]-data_list[i],data_list[2041]-data_list[i],data_list[2042]-data_list[i],data_list[2043]-data_list[i],data_list[2044]-data_list[i],data_list[2045]-data_list[i],data_list[2046]-data_list[i],data_list[2047]-data_list[i],0,0])
             if len(pri_[i])!=30:
                 print(i)
             
-        elif i==499:
-            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[500]-data_list[i],data_list[501]-data_list[i],data_list[502]-data_list[i],data_list[503]-data_list[i],data_list[504]-data_list[i],data_list[505]-data_list[i],data_list[506]-data_list[i],data_list[507]-data_list[i],data_list[508]-data_list[i],data_list[509]-data_list[i],data_list[510]-data_list[i],data_list[511]-data_list[i],0,0,0])
+        elif i==2035:
+            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[2036]-data_list[i],data_list[2037]-data_list[i],data_list[2038]-data_list[i],data_list[2039]-data_list[i],data_list[2040]-data_list[i],data_list[2041]-data_list[i],data_list[2042]-data_list[i],data_list[2043]-data_list[i],data_list[2044]-data_list[i],data_list[2045]-data_list[i],data_list[2046]-data_list[i],data_list[2047]-data_list[i],0,0,0])
             if len(pri_[i])!=30:
                 print(i)
             
-        elif i==500:
-            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[501]-data_list[i],data_list[502]-data_list[i],data_list[503]-data_list[i],data_list[504]-data_list[i],data_list[505]-data_list[i],data_list[506]-data_list[i],data_list[507]-data_list[i],data_list[508]-data_list[i],data_list[509]-data_list[i],data_list[510]-data_list[i],data_list[511]-data_list[i],0,0,0,0])
+        elif i==2036:
+            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[2037]-data_list[i],data_list[2038]-data_list[i],data_list[2039]-data_list[i],data_list[2040]-data_list[i],data_list[2041]-data_list[i],data_list[2042]-data_list[i],data_list[2043]-data_list[i],data_list[2044]-data_list[i],data_list[2045]-data_list[i],data_list[2046]-data_list[i],data_list[2047]-data_list[i],0,0,0,0])
             if len(pri_[i])!=30:
                 print(i)
             
-        elif i==501:
-            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[502]-data_list[i],data_list[503]-data_list[i],data_list[504]-data_list[i],data_list[505]-data_list[i],data_list[506]-data_list[i],data_list[507]-data_list[i],data_list[508]-data_list[i],data_list[509]-data_list[i],data_list[510]-data_list[i],data_list[511]-data_list[i],0,0,0,0,0])
+        elif i==2037:
+            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[2038]-data_list[i],data_list[2039]-data_list[i],data_list[2040]-data_list[i],data_list[2041]-data_list[i],data_list[2042]-data_list[i],data_list[2043]-data_list[i],data_list[2044]-data_list[i],data_list[2045]-data_list[i],data_list[2046]-data_list[i],data_list[2047]-data_list[i],0,0,0,0,0])
             if len(pri_[i])!=30:
                 print(i)
             
-        elif i==502:
-            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[503]-data_list[i],data_list[504]-data_list[i],data_list[505]-data_list[i],data_list[506]-data_list[i],data_list[507]-data_list[i],data_list[508]-data_list[i],data_list[509]-data_list[i],data_list[510]-data_list[i],data_list[511]-data_list[i],0,0,0,0,0,0])
+        elif i==2038:
+            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[2039]-data_list[i],data_list[2040]-data_list[i],data_list[2041]-data_list[i],data_list[2042]-data_list[i],data_list[2043]-data_list[i],data_list[2044]-data_list[i],data_list[2045]-data_list[i],data_list[2046]-data_list[i],data_list[2047]-data_list[i],0,0,0,0,0,0])
             # print(i)
             # print(len(pri_[i]))
             if len(pri_[i])!=30:
                 print(i)
            
-        elif i==503:
-            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[504]-data_list[i],data_list[505]-data_list[i],data_list[506]-data_list[i],data_list[507]-data_list[i],data_list[508]-data_list[i],data_list[509]-data_list[i],data_list[510]-data_list[i],data_list[511]-data_list[i],0,0,0,0,0,0,0])
+        elif i==2039:
+            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[2040]-data_list[i],data_list[2041]-data_list[i],data_list[2042]-data_list[i],data_list[2043]-data_list[i],data_list[2044]-data_list[i],data_list[2045]-data_list[i],data_list[2046]-data_list[i],data_list[2047]-data_list[i],0,0,0,0,0,0,0])
             # print(i)
             # print(len(pri_[i]))
             if len(pri_[i])!=30:
                 print(i)
             
-        elif i==504:
-            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[505]-data_list[i],data_list[506]-data_list[i],data_list[507]-data_list[i],data_list[508]-data_list[i],data_list[509]-data_list[i],data_list[510]-data_list[i],data_list[511]-data_list[i],0,0,0,0,0,0,0,0])
+        elif i==2040:
+            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[2041]-data_list[i],data_list[2042]-data_list[i],data_list[2043]-data_list[i],data_list[2044]-data_list[i],data_list[2045]-data_list[i],data_list[2046]-data_list[i],data_list[2047]-data_list[i],0,0,0,0,0,0,0,0])
             # print(i)
             # print(len(pri_[i]))
             if len(pri_[i])!=30:
                 print(i)
             
-        elif i==505:
-            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[506]-data_list[i],data_list[507]-data_list[i],data_list[508]-data_list[i],data_list[509]-data_list[i],data_list[510]-data_list[i],data_list[511]-data_list[i],0,0,0,0,0,0,0,0,0])
+        elif i==2041:
+            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[2042]-data_list[i],data_list[2043]-data_list[i],data_list[2044]-data_list[i],data_list[2045]-data_list[i],data_list[2046]-data_list[i],data_list[2047]-data_list[i],0,0,0,0,0,0,0,0,0])
             # print(i)
             # print(len(pri_[i]))
             if len(pri_[i])!=30:
                 print(i)
             
-        elif i==506:
-            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[507]-data_list[i],data_list[508]-data_list[i],data_list[509]-data_list[i],data_list[510]-data_list[i],data_list[511]-data_list[i],0,0,0,0,0,0,0,0,0,0])
+        elif i==2042:
+            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[2043]-data_list[i],data_list[2044]-data_list[i],data_list[2045]-data_list[i],data_list[2046]-data_list[i],data_list[2047]-data_list[i],0,0,0,0,0,0,0,0,0,0])
             # print(i)
             # print(len(pri_[i]))
             if len(pri_[i])!=30:
                 print(i)
             
-        elif i==507:
-            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[508]-data_list[i],data_list[509]-data_list[i],data_list[510]-data_list[i],data_list[511]-data_list[i],0,0,0,0,0,0,0,0,0,0,0])
+        elif i==2043:
+            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[2044]-data_list[i],data_list[2045]-data_list[i],data_list[2046]-data_list[i],data_list[2047]-data_list[i],0,0,0,0,0,0,0,0,0,0,0])
             # print(i)
             # print(len(pri_[i]))
             if len(pri_[i])!=30:
                 print(i)
             
-        elif i==508:
-            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[509]-data_list[i],data_list[510]-data_list[i],data_list[511]-data_list[i],0,0,0,0,0,0,0,0,0,0,0,0])
+        elif i==2044:
+            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[2045]-data_list[i],data_list[2046]-data_list[i],data_list[2047]-data_list[i],0,0,0,0,0,0,0,0,0,0,0,0])
             # print(i)
             # print(len(pri_[i]))
             if len(pri_[i])!=30:
                 print(i)
             
-        elif i==509:
-            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[510]-data_list[i],data_list[511]-data_list[i],0,0,0,0,0,0,0,0,0,0,0,0,0])            # all_pri.append(pri_)
+        elif i==2045:
+            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[2046]-data_list[i],data_list[2047]-data_list[i],0,0,0,0,0,0,0,0,0,0,0,0,0])            # all_pri.append(pri_)
             # print(i)
             # print(len(pri_[i]))
             if len(pri_[i])!=30:
                 print(i)
             
-        elif i==510:
-            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[511]-data_list[i],0,0,0,0,0,0,0,0,0,0,0,0,0,0])
+        elif i==2046:
+            pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],data_list[2047]-data_list[i],0,0,0,0,0,0,0,0,0,0,0,0,0,0])
             # print(i)
             # print(len(pri_[i]))
             if len(pri_[i])!=30:
                 print(i)
             
-        elif i==511:   
+        elif i==2047:   
             pri_.append([data_list[i]-data_list[i-15],data_list[i]-data_list[i-14],data_list[i]-data_list[i-13],data_list[i]-data_list[i-12],data_list[i]-data_list[i-11],data_list[i]-data_list[i-10],data_list[i]-data_list[i-9],data_list[i]-data_list[i-8],data_list[i]-data_list[i-7],data_list[i]-data_list[i-6],data_list[i]-data_list[i-5],data_list[i]-data_list[i-4],data_list[i]-data_list[i-3],data_list[i]-data_list[i-2],data_list[i]-data_list[i-1],0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
             # print(i)
             # print(len(pri_[i]))
@@ -236,7 +236,7 @@ def generate_vector(file,data_list,label_list,num,num_file,j):
     # 此处对每一个向量进行正态分布归一化处理
     # pri = normal_process(pri_)
     # print(len(pri_))
-    pri = [data/12500  for pri in pri_ for data in pri]
+    pri = [data/22500  for pri in pri_ for data in pri]
     all_pri.append(pri)
     all_label.append(label_list)
     # print(all_pri)
@@ -317,9 +317,9 @@ def write_vector_to_file(file,filename,label_list,data_list,temp):
     
 if __name__ == "__main__":
 
-    # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/3/test/',1)
-    # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/5/test/',1)
-    read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/7/test/',1)
+    read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/2048_1_9/train/',0)
+    read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/2048_1_9/test/',1)
+    read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/2048_1_9/val/',2)
     # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/5test/',3)
     # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/5参差/two/',4)
     

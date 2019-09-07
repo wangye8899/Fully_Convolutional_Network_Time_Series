@@ -36,8 +36,9 @@ def read_file_and_to_numpy(filename):
     sess = tf.Session()
     target = sess.run(target)
     target = [target[i:i+512] for i in range(0,len(target),512)]
-    # print(len(target))
-    print(len(data_numpy[0]))
+    print(target)
+    # print(data)
+    # print(len(data_numpy[0]))
     # print(data_numpy.shape)
     # print(type(target))
     # 返回数据和标签
@@ -62,15 +63,19 @@ def read_file_and_to_numpy_val(filename):
     
     label_numpy = np.array(label)
     data_numpy = np.array(data)
-    print(len(data_numpy))
-    # data_numpy = data_numpy[:102400]
-    # data_numpy  = data_numpy.reshape(102400,1,30)
-    # target = label_numpy[:102400]
     target = tf.one_hot(label,2)
     sess = tf.Session()
     target = sess.run(target)
+    print(data_numpy)
+    print(target)
+
     return target,data_numpy
 
 
 if __name__ == "__main__":
     read_file_and_to_numpy_val('all_data_vector_test.csv')
+
+
+
+
+

@@ -1,11 +1,11 @@
 import tensorflow as tf
 import tensorflow.keras as keras
 import configparser
-from LSTM_FCN_model import LSTM_FCN
+from LSTM_FCN_model_5layers import LSTM_FCN
 # from file_utils import read_file_and_to_numpy
 from file_utils512 import read_file_and_to_numpy
 from file_utils512 import read_file_and_to_numpy_val
-file = './config/parameter_512_5.ini'
+file = './config/parameter_512_1_9.ini'
 
 
 import matplotlib
@@ -53,8 +53,8 @@ weights = {
 'conv1':tf.Variable(init([8,1,128])),
 'conv2':tf.Variable(init([5,128,256])),
 'conv3':tf.Variable(init([3,256,128])),
-# 'conv4':tf.Variable(init([5,128,64])),
-# 'conv5':tf.Variable(init([3,64,64])),
+'conv4':tf.Variable(init([3,128,128])),
+'conv5':tf.Variable(init([3,128,128])),
 # 'conv6':tf.Variable(init([3,64,32])),
 # 'conv4_w':tf.Variable(tf.random_normal([3,1,256,128])),
 'out_w':tf.Variable(init([256,2]))
@@ -63,8 +63,8 @@ biases = {
 'conv1':tf.Variable(init([128])),
 'conv2':tf.Variable(init([256])),
 'conv3':tf.Variable(init([128])),
-# 'conv4':tf.Variable(init([64])),
-# 'conv5':tf.Variable(init([64])),
+'conv4':tf.Variable(init([128])),
+'conv5':tf.Variable(init([128])),
 # 'conv6':tf.Variable(init([32])),
 # 'conv4_b':tf.Variable(tf.random_normal([128])),
 'out_b':tf.Variable(init([2]))
@@ -138,6 +138,11 @@ with tf.Session() as sess:
             random_index = random.randint(0,9999)
             batch_data = data[random_index]
             batch_label = label[random_index]
+            batch_data = np.array(batch_data)
+            batch_label = np.array(batch_label)
+            # print(batch_data.shape)
+            # print(batch_label.shape)
+            
             batch_data = batch_data.reshape((batch_size*512,1,num_input))
             # 现在开始训练
             sess.run(train_steps,feed_dict={X:batch_data,Y:batch_label})

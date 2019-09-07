@@ -5,8 +5,8 @@ import configparser
 import os
 import pandas as pd
 from data_process import generate_vector,write_vector_to_file
-from file_utils import  read_file_and_to_numpy_val
-file = './config/parameter.ini'
+from file_utils512 import  read_file_and_to_numpy_val
+file = './config/parameter_512_5.ini'
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -64,14 +64,19 @@ def read_model(filename,test_file,num_input,timesteps,batch_size,test_steps,test
         loss_list = []
         epoch_list = []
         count = 0
-        test_data = test_data[:64000]
-        test_label = test_label[:64000]
+        # test_data = test_data[:51200]
+        # test_label = test_label[:51200]
         test_data = test_data.reshape(len(test_data),1,num_input)
         print("Final Test Accuracy:",\
                 sess.run(accuracy,feed_dict={X:test_data,Y:test_label}))
         print("Final Test Loss:",\
                 sess.run(loss,feed_dict={X:test_data,Y:test_label}))
-        # print(sess.run(tf.argmax(prediction,1),feed_dict={X:test_data}))
+        pre = sess.run(tf.argmax(prediction,1),feed_dict={X:test_data})
+        print(sess.run(tf.argmax(prediction,1),feed_dict={X:test_data}))
+
+        f = open('pre.txt','a')
+        for i in range(len(pre)):
+            f.write(str(pre[i])+"\n")
         plt.figure()
         plt.plot(np.array(epoch_list),np.array(acc_list))
         plt.xlabel("epoch_iter")

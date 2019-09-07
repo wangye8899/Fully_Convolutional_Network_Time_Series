@@ -24,7 +24,7 @@ def read_file_and_to_numpy(filename):
     # label = [label[i:i+256] for i in range(0,len(data),256)]
     label_numpy = np.array(label)
     # print(len(label))
-    data = [data[j:j+512] for j in range(0,len(data),512)]
+    data = [data[j:j+2048] for j in range(0,len(data),2048)]
     data_numpy = np.array(data)
     # print(len(data_numpy))
     # print(label_numpy)
@@ -35,7 +35,7 @@ def read_file_and_to_numpy(filename):
     # print(target)             
     sess = tf.Session()
     target = sess.run(target)
-    target = [target[i:i+512] for i in range(0,len(target),512)]
+    target = [target[i:i+2048] for i in range(0,len(target),2048)]
     # print(len(target))
     print(len(data_numpy[0]))
     # print(data_numpy.shape)
