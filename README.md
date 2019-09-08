@@ -63,6 +63,7 @@ $$
 E_{i,t}^{(l)} = f(b_i^{(l)}+\sum_{t^{'}=1}^d<W_{i,t^{'}{,}}{E_{t+d-t^{'}}^{(l-1)}}>)
 $$
 
+<img src="http://www.forkosh.com/mathtex.cgi? E_{i,t}^{(l)} = f(b_i^{(l)}+\sum_{t^{'}=1}^d<W_{i,t^{'}{,}}{E_{t+d-t^{'}}^{(l-1)}}>)">
 这个数学公式就是最好的解释，简单说一下参数：
 
 $l$：*index of layers*
