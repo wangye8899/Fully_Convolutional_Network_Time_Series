@@ -248,13 +248,13 @@ def generate_vector(file,data_list,label_list,num,num_file,j):
     print(j)
     if num==0:
         # print("dasd")
-        foldername = "all_data_vector_train.csv"
+        foldername = "./train/"
         write_vector_to_file(file,foldername,label_list,pri,1)
     elif num==1:
-        foldername = "all_data_vector_test.csv"
+        foldername = "./test/"
         write_vector_to_file(file,foldername,label_list,pri,1)
     elif num==2 :
-        foldername = "all_data_vector_val.csv"
+        foldername = "./val/"
         write_vector_to_file(file,foldername,label_list,pri,1)
 
 def max_min(all_pri,all_label):
@@ -281,7 +281,7 @@ def write_vector_to_file(file,filename,label_list,data_list,temp):
 
     if temp==1:
         # if语句中的内容只有在train中使用
-        f = open(filename,'a')
+        f = open(filename+file,'a')
         step = 30
         # 还原回原来的格式
         data_list = [ data_list[i:i+step]  for i in range(0,len(data_list),step) ]
@@ -320,9 +320,9 @@ def write_vector_to_file(file,filename,label_list,data_list,temp):
     
 if __name__ == "__main__":
 
-    read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/256_3组5参差/train/',0)
-    read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/256_3组5参差/test/',1)
-    read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/256_3组5参差/val/',2)
+    # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/256_1_5_30/train/',0)
+    read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/256_1_5_30/test0/',1)
+    # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/256_1_5_30/val/',2)
     # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/5test/',3)
     # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/5参差/two/',4)
     

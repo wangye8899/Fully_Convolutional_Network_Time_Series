@@ -5,12 +5,14 @@ import configparser
 import os
 import pandas as pd
 from data_process import generate_vector,write_vector_to_file
-from file_utils512 import  read_file_and_to_numpy_val
-file = './config/parameter_512_5.ini'
+# from file_utils512 import  read_file_and_to_numpy_val
+from batch_read256 import read_csv_,TFRecordReader
+file = './config/parameter_256_3_5.ini'
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
+import time
 
 # 读取配置文件，拿到参数
 def read_config(file):
@@ -59,42 +61,89 @@ def read_model(filename,test_file,num_input,timesteps,batch_size,test_steps,test
         X = graph.get_operation_by_name('X').outputs[0]
         Y = graph.get_operation_by_name('Y').outputs[0]
         
-        test_label,test_data = read_file_and_to_numpy_val(test_file)
+        test_data,test_label,test_file_list = TFRecordReader(test_file,0)
+        temp_label = test_label
+        test_label = tf.cast(test_label,tf.int32)
+        test_label = tf.one_hot(test_label,2)
+        test_label = sess.run(test_label)
         acc_list = []
         loss_list = []
         epoch_list = []
         count = 0
+        acc_sum = 0
+        loss_sum = 0
         # test_data = test_data[:51200]
         # test_label = test_label[:51200]
-        test_data = test_data.reshape(len(test_data),1,num_input)
-        print("Final Test Accuracy:",\
-                sess.run(accuracy,feed_dict={X:test_data,Y:test_label}))
-        print("Final Test Loss:",\
-                sess.run(loss,feed_dict={X:test_data,Y:test_label}))
-        pre = sess.run(tf.argmax(prediction,1),feed_dict={X:test_data})
-        print(sess.run(tf.argmax(prediction,1),feed_dict={X:test_data}))
+        # 循环测试所有的csv测试文件
+        start_time = time.time()
+        for i in range(len(test_file_list)):
+            file = str(test_file_list[i])
+            batch_data = test_data[i]
+            batch_label = test_label[i]
+            batch_data = np.reshape(batch_data,[1,256,30])
+            # batch_data = batch_data.reshape(len(batch_data),1,num_input)
+            print(file+":"+"Final Test Accuracy:",\
+                    sess.run(accuracy,feed_dict={X:batch_data,Y:batch_label}))
+            print(file+":"+"Final Test Loss:",\
+                    sess.run(loss,feed_dict={X:batch_data,Y:batch_label}))
+            
+            # pre = sess.run(tf.argmax(prediction,1),feed_dict={X:test_data})
+            # print(sess.run(tf.argmax(prediction,1),feed_dict={X:test_data}))
+        end_time = time.time()
+        cost_time_sum = end_time - start_time
+        print("测试文件的总时间为:"+str(cost_time_sum))
+        print("平均的测试时间:"+str(cost_time_sum/len(test_file_list)))
+        
+        print("计算平均准确率中.................")
+        for i in range(len(test_file_list)):
+            file = str(test_file_list[i])
+            batch_data = test_data[i]
+            batch_label = test_label[i]
+            batch_data = np.reshape(batch_data,[1,256,30])
+            print(file+":"+"Final Test Accuracy:",\
+                    sess.run(accuracy,feed_dict={X:batch_data,Y:batch_label}))
+            print(file+":"+"Final Test Loss:",\
+                    sess.run(loss,feed_dict={X:batch_data,Y:batch_label}))
+            acc_sum  = acc_sum+sess.run(accuracy,feed_dict={X:batch_data,Y:batch_label})
+            loss_sum = loss_sum+sess.run(loss,feed_dict={X:batch_data,Y:batch_label})
+        print("平均准确率为："+str(acc_sum/len(test_file_list)))
+        print("平均损失为："+str(loss_sum/len(test_file_list)))
 
-        f = open('pre.txt','a')
-        for i in range(len(pre)):
-            f.write(str(pre[i])+"\n")
-        plt.figure()
-        plt.plot(np.array(epoch_list),np.array(acc_list))
-        plt.xlabel("epoch_iter")
-        plt.ylabel("test_acc")
-        plt.title("The accuracy of test")
-        plt.legend()
-        plt.savefig('test_acc.png')
-        plt.show()
-
-        plt.figure()
-        plt.plot(np.array(epoch_list),np.array(loss_list))
-        plt.xlabel("epoch_iter")
-        plt.ylabel("test_losss")
-        plt.title("The loss of test")
-        plt.legend()
-        plt.savefig('test_loss.png')
-        plt.show()
-
+        pre_list = np.array( sess.run(tf.argmax(prediction,1),feed_dict={X:batch_data,Y:batch_label}))
+        wirte_csv = open('./pre.csv','a')
+        # zeros_list = []
+        # zeros_sum = 0 
+        # one_sum = 0
+        # two_sum = 0
+        # temp_count_0 = 0
+        # temp_count_1 = 0
+        # temp_count_2 = 0
+        # for i in pre_list:
+        #     print(i)
+        #     zeros_list.append(i)
+        #     wirte_csv.write(str(i))
+        #     wirte_csv.write('\n')
+        # for i in range(len(zeros_list)):
+        #     if temp_label[0][i] == 0:
+        #         zeros_sum+=1
+        #     if temp_label[0][i] == 1:
+        #         one_sum+=1
+        #     if temp_label[0][i] == 2:
+        #         two_sum+=1
+        # for i in range(len(zeros_list)):
+        #     if zeros_list[i] == 0:
+        #         if temp_label[0][i] == 0:
+        #             temp_count_0+=1
+        #     if zeros_list[i] == 1:
+        #         if temp_label[0][i] == 1:
+        #             temp_count_1+=1
+        #     if zeros_list[i]==2:
+        #         if temp_label[0][i] == 2:
+        #             temp_count_2+=1
+            
+        # print(temp_count_0/zeros_sum)
+        # print(temp_count_1/one_sum)
+        # print(temp_count_2/two_sum)
         
 def read_file_produce_vector(path,i):
     # 拿到文件夹下所有的csv文件

@@ -312,17 +312,19 @@ def write_vector_to_file(file,foldername,label_list,data_list,temp):
                 label_list_[num] = 0
             else:
                 label_list_[num] = 1
+                # label_list_[num] = int(label_list_[num])
             # print(con.join(final_data_str[num]))
 
             f.write(str(label_list_[num])+","+con.join(final_data_str[num])+"\n")
 
     
 if __name__ == "__main__":
-
-    # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/1024_1_5_30/train45000/',0)
-    read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/1024_1_5_30/test/',1)
-    read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/1024_1_5_30/val/',2)
-    # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/5test/',3)
+    # read_file_and_get_data('./data',0)
+    
+    read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/1024_3_5_30/val0/',2)
+    # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/1024_1_5_30/test0/',1)
+    # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/1024_3_5_30/val0/',2)
+    # read_file_and_get_data('/home/wang/Radar数据/ /data/5test/',3)
     # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/5参差/two/',4)
     
     

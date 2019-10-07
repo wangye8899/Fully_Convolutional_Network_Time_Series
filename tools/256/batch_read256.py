@@ -22,7 +22,7 @@ def read_csv_(file_name):
 def csv_convert_TFRecord(filename,num):
     # 此函数实现csv文件数据转换成TFRecord格式的数据
     
-    floder = "./TFval/"
+    floder = "./TFtest/"
     writer = tf.python_io.TFRecordWriter(floder+str(num)+".tfrecords")
     label,data = read_csv_(filename)
     example = tf.train.Example(
@@ -69,7 +69,7 @@ def TFRecordReader(tfrecord_file,flag):
     
     label = tf.cast(parsed_features["label"],tf.int64)
     data = tf.cast(parsed_features["data"],tf.float32)
-    # data = tf.reshape(data,[None,1024,30])
+    data = tf.reshape(data,[1024,30])
     
     label_batch,data_batch = tf.train.shuffle_batch([label, data], batch_size=num,capacity=10000, min_after_dequeue=200, num_threads=5)
     coord=tf.train.Coordinator()
@@ -89,11 +89,11 @@ def TFRecordReader(tfrecord_file,flag):
 
 if __name__ == "__main__":
     # read_csv_('data153.csv')
-    file_list = os.listdir('./val/')
+    file_list = os.listdir('./test/')
     i = 0
     for file in file_list:
         i+=1
-        file="./val/"+file
+        file="./test/"+file
         csv_convert_TFRecord(file,i)
 
     # TFRecordReader('./TFval/',0)

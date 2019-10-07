@@ -71,3 +71,7 @@ $l$：*index of layers*
 $d$：*the duration of filters*
 
 $E$: Acti
+
+
+
+/home/wang/anaconda3/envs/tensorflow/bin/python

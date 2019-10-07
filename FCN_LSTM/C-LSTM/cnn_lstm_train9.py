@@ -1,8 +1,8 @@
 import tensorflow as tf
 import tensorflow.keras as keras
 import configparser
-from LSTM_FCN_model import LSTM_FCN
-file = './config/parameter_1024_1_5.ini'
+from cnn_lstm_model6 import CNN_LSTM
+file = './config/parameter_cnn_4.ini'
 import os
 from batch_read import read_csv_,TFRecordReader
 import matplotlib
@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import random
 import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' 
+# os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' 
 # 读取配置文件，拿到参数
 def read_config(file):
     cf = configparser.ConfigParser()
@@ -51,19 +51,27 @@ weights = {
 'conv1':tf.Variable(init([8,1,128])),
 'conv2':tf.Variable(init([5,128,256])),
 'conv3':tf.Variable(init([3,256,128])),
-# 'conv4':tf.Variable(init([5,128,64])),
-# 'conv5':tf.Variable(init([3,64,64])),
-# 'conv6':tf.Variable(init([3,64,32])),
+'conv4':tf.Variable(init([3,128,128])),
+'conv5':tf.Variable(init([3,128,128])),
+'conv6':tf.Variable(init([3,128,128])),
+'conv7':tf.Variable(init([3,128,128])),
+'conv8':tf.Variable(init([3,128,128])),
+'conv9':tf.Variable(init([3,128,128])),
 # 'conv4_w':tf.Variable(tf.random_normal([3,1,256,128])),
-'out_w':tf.Variable(init([256,2]))
+'out_w':tf.Variable(init([128,2]))
 }
 biases = {
 'conv1':tf.Variable(init([128])),
 'conv2':tf.Variable(init([256])),
 'conv3':tf.Variable(init([128])),
-# 'conv4':tf.Variable(init([64])),
-# 'conv5':tf.Variable(init([64])),
-# 'conv6':tf.Variable(init([32])),
+'conv4':tf.Variable(init([128])),
+'conv5':tf.Variable(init([128])),
+'conv6':tf.Variable(init([128])),
+
+'conv7':tf.Variable(init([128])),
+'conv8':tf.Variable(init([128])),
+'conv9':tf.Variable(init([128])),
+
 # 'conv4_b':tf.Variable(tf.random_normal([128])),
 'out_b':tf.Variable(init([2]))
 }
@@ -72,13 +80,13 @@ X = tf.placeholder(tf.float32,[None,1,num_input],name='X')
 Y = tf.placeholder(tf.float32,[None,num_classes],name='Y')
 # batch_size = tf.Variable(128,dtype=tf.float32)
 lr = tf.Variable(0.001,dtype=tf.float32)
-LSTM_FCN = LSTM_FCN(X,weights,biases,num_hidden)
-logits = LSTM_FCN.connect_FCN_LSTM()
+CNN_LSTM = CNN_LSTM(X,weights,biases,num_hidden)
+logits = CNN_LSTM.Return_out()
+print(np.array(logits).shape)
 prediction = tf.nn.softmax(logits)
-# ??????
+
 loss_op = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=logits,labels=Y))
 
-# loss_op = tf.reduce_mean(tf.square(Y-logits))/2
 optimizer = tf.train.AdamOptimizer(learning_rate=lr)
 
 train_steps = optimizer.minimize(loss_op)
@@ -110,11 +118,14 @@ with tf.Session() as sess:
     val_epoch_list = []
     file_val = open('val.txt','a')
     # print(len(val_file_list))
-    data,label = TFRecordReader(train_file,0)
+    print("即将开始读取数据")
+    data,label,_ = TFRecordReader(train_file,0)
     label = tf.cast(label,tf.int32)
     label = tf.one_hot(label,2)
     label = sess.run(label)
-    val_data , val_label = TFRecordReader(val_file,0)
+    # print("hsuchausihcashdckuashckjasgcjsakhdsagfhdsugfoidsbfvjhsdhfsd")
+    # print(label)
+    val_data , val_label,_ = TFRecordReader(val_file,0)
     val_data = val_data[:20]
     val_label = val_label[:20]
     val_label = tf.cast(val_label,tf.int32)
@@ -141,11 +152,14 @@ with tf.Session() as sess:
         # label = label[idx]
         print("Epoch"+str(epoch))
         for step in range(1,training_steps+1):
-        #    训练数据，随机读取
-            random_index = random.randint(0,49999)
+            
+            # 训练数据，随机读取
+            random_index = random.randint(0,4999)
+            # random_index = 0
             batch_data = data[random_index]
             batch_label = label[random_index]
             batch_data = batch_data.reshape(len(batch_data),1,num_input)
+
             # 现在开始训练
             sess.run(train_steps,feed_dict={X:batch_data,Y:batch_label})
             loss,accu = sess.run([loss_op,acc],feed_dict={X:batch_data,Y:batch_label})
@@ -154,12 +168,44 @@ with tf.Session() as sess:
                 loss_list.append(loss)  
                 epoch_list.append(p)
             p+=1 
+            
             if step%display_step==0:
+                # print("第一层卷积之后的feature map")
+                # c1_array = np.array(sess.run(c1,feed_dict={X:batch_data,Y:batch_label}))
+                # print(c1_array)
+                # print("第二层卷积之后的feature map")
+                # c2_array = np.array(sess.run(c2,feed_dict={X:batch_data,Y:batch_label}))
+                # print(c2_array)
+                # print("第三层卷积之后的feature map")
+                # c3_array = np.array(sess.run(c3,feed_dict={X:batch_data,Y:batch_label}))
+                # print(c3_array)
                 print("Step " + str(step) + ", Minibatch Loss= " + \
                     "{:.4f}".format(loss) + ", Training Accuracy= " + \
                     "{:.3f}".format(accu))
+
+        
         # 每一epoch之后需要进行验证
-    
+        # print("源数据:")
+        # print(batch_data)
+        # print("第一层卷积之后的feature map")
+        # print(sess.run(c1,feed_dict={X:batch_data,Y:batch_label}))
+        
+        # print("第二层卷积之后的feature map")
+        # print(sess.run(c2,feed_dict={X:batch_data,Y:batch_label}))
+
+        # print("第三层卷积之后的feature map")
+        # print(sess.run(c3,feed_dict={X:batch_data,Y:batch_label}))
+
+        # fwiter = open('feature.txt','a')
+        # fwiter.write("源数据"+"\n")
+        # fwiter.write(batch_data+"\n")
+        # fwiter.write("c1"+"\n")
+        # fwiter.write(sess.run(c1,feed_dict={X:batch_data,Y:batch_label}))
+        # fwiter.write("c2"+"\n")
+        # fwiter.write(sess.run(c2,feed_dict={X:batch_data,Y:batch_label}))
+        # fwiter.write("c3"+"\n")
+        # fwiter.write(sess.run(c3,feed_dict={X:batch_data,Y:batch_label}))
+        
         temp_loss_= 0
         temp_sum = 0
         Val_loss,Val_acc = sess.run([loss_op,acc],feed_dict={X:val_data,Y:val_label})
@@ -175,7 +221,6 @@ with tf.Session() as sess:
             else:
                 # 说明经过一个epoch之后模型并没有改善
                 count+=1
-
                 print("loss未改善:"+str(count)+"次"+"--->"+str(Val_loss))
     
         if Val_acc>temp_acc:

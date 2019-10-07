@@ -58,8 +58,8 @@ def TFRecordReader(tfrecord_file,flag):
     _,serialized_example_none = reader_none.read(filename_queues)
     
     features = {
-        "data":tf.FixedLenFeature([30*1024],tf.float32),
-        "label":tf.FixedLenFeature([1024],tf.int64)
+        "data":tf.FixedLenFeature([30*256],tf.float32),
+        "label":tf.FixedLenFeature([256],tf.int64)
     }
 
     init = tf.global_variables_initializer()
@@ -69,7 +69,7 @@ def TFRecordReader(tfrecord_file,flag):
     
     label = tf.cast(parsed_features["label"],tf.int64)
     data = tf.cast(parsed_features["data"],tf.float32)
-    # data = tf.reshape(data,[None,1024,30])
+    data = tf.reshape(data,[256,30])
     
     label_batch,data_batch = tf.train.shuffle_batch([label, data], batch_size=num,capacity=10000, min_after_dequeue=200, num_threads=5)
     coord=tf.train.Coordinator()
@@ -80,10 +80,7 @@ def TFRecordReader(tfrecord_file,flag):
     # label = tf.cast(label,tf.int32)
     # label = tf.one_hot(label,4)
     # print(np.array(sess.run(label)))
-    print(np.array(data).shape)
-    print(np.array(label).shape)
-    print(data[0][:10])
-    print(label[0][:10])
+    
     return data,label ,file_list_
 
 
