@@ -50,14 +50,14 @@ init = tf.keras.initializers.he_uniform()
 # init = tf.keras.initializers.random_normal()
 
 weights = {
-'conv1':tf.Variable(init([8,1,128])),
+'conv1':tf.Variable(init([8,30,128])),
 'conv2':tf.Variable(init([5,128,256])),
 'conv3':tf.Variable(init([3,256,128])),
 # 'conv4':tf.Variable(init([5,128,64])),
 # 'conv5':tf.Variable(init([3,64,64])),
 # 'conv6':tf.Variable(init([3,64,32])),
 # 'conv4_w':tf.Variable(tf.random_normal([3,1,256,128])),
-'out_w':tf.Variable(init([256,2]))
+'out_w':tf.Variable(init([128,2]))
 }
 biases = {
 'conv1':tf.Variable(init([128])),

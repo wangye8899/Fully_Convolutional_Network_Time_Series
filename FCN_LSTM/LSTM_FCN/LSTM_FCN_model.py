@@ -4,6 +4,10 @@ import matplotlib.pyplot as mlp
 import tensorflow.keras as keras 
 from tensorflow.contrib import rnn
 from tensorflow.keras.models import Model , Sequential
+import tensorflow as tf
+import tensorflow.contrib as contrib
+import numpy as np
+from tensorflow.python.ops.rnn import bidirectional_dynamic_rnn
 
 class LSTM_FCN:
     
@@ -16,8 +20,8 @@ class LSTM_FCN:
 
     def FCN_(self):
         # 单个变量，多个时间步处理
-        x = tf.transpose(self.x,[0,2,1])
-        print(np.array(x))
+        # x = tf.transpose(self.x,[0,2,1])
+        # print(np.array(x))
         # 第一层卷积
         conv1 = tf.nn.conv1d(x,self.weights['conv1'],1,'SAME')
         conv1 = tf.nn.bias_add(conv1,self.biases['conv1'])
@@ -85,10 +89,24 @@ class LSTM_FCN:
         return connect_out
 
     def Bi_LSTM_(self):
-        model = Sequential()
-        model.add(tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(self.num_hidden)))(self.x)
-        return model
-        x = model.add(tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(self.num_hidden)))(self.x)
-        return x
+        # model = Sequential()
+        # model.add(tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(self.num_hidden)))(self.x)
+        # return model
+        # x = model.add(tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(self.num_hidden)))(self.x)
+        # return x
     # def ResNet_(self):
+        input_ = self.x
+        for _ in range(3):
+            with tf.variable_scope(None, default_name="bidirectional-rnn"):
+                fw_lstm_cell = contrib.rnn.LSTMCell(self.num_hiddens,initializer=tf.orthogonal_initializer())
+                bw_lstm_cell = contrib.rnn.LSTMCell(self.num_hiddens,initializer=tf.orthogonal_initializer())
+                # 目前均不加Dropout层
+                outputs,state = tf.nn.bidirectional_dynamic_rnn(fw_lstm_cell,bw_lstm_cell,input_,dtype=tf.float32)
+                input_ = tf.concat(outputs,2) 
 
+        #此时3层BLSTM输出的形状为 [?,256,256]
+        # 使用全连接层进行分类
+        input_reshape = tf.reshape(input_,[-1,256])
+        return input_reshape
+fcn_return = tf.matmul(input_reshape,self.weights['out'])+self.biases['out']
+return fcn_return

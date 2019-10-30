@@ -14,7 +14,7 @@ def read_csv_(file_name):
     # step = 30
     # data = [ data[i:i+step] for i in range(0,len(data),step)]
     data = np.array(data)
-    # print(label)
+    print(label)
     
     return label ,data
 
@@ -22,7 +22,7 @@ def read_csv_(file_name):
 def csv_convert_TFRecord(filename,num):
     # 此函数实现csv文件数据转换成TFRecord格式的数据
     
-    floder = "./TFtest/"
+    floder = "./TFval/"
     writer = tf.python_io.TFRecordWriter(floder+str(num)+".tfrecords")
     label,data = read_csv_(filename)
     example = tf.train.Example(
@@ -42,6 +42,7 @@ def TFRecordReader(tfrecord_file,flag):
     # tfrecord_file = ['data153.csv.tfrecords']
     print("开始读文件")
     file_list_ =  os.listdir(tfrecord_file)
+    print(file_list_)
     if flag==0:
         num = len(file_list_)
     else:
@@ -58,8 +59,8 @@ def TFRecordReader(tfrecord_file,flag):
     _,serialized_example_none = reader_none.read(filename_queues)
     
     features = {
-        "data":tf.FixedLenFeature([30*1024],tf.float32),
-        "label":tf.FixedLenFeature([1024],tf.int64)
+        "data":tf.FixedLenFeature([30*256],tf.float32),
+        "label":tf.FixedLenFeature([256],tf.int64)
     }
 
     init = tf.global_variables_initializer()
@@ -69,31 +70,44 @@ def TFRecordReader(tfrecord_file,flag):
     
     label = tf.cast(parsed_features["label"],tf.int64)
     data = tf.cast(parsed_features["data"],tf.float32)
-    data = tf.reshape(data,[1024,30])
-    
-    label_batch,data_batch = tf.train.shuffle_batch([label, data], batch_size=num,capacity=10000, min_after_dequeue=200, num_threads=5)
+    # data = tf.reshape(data,[None,1024,30])
+    label_batch,data_batch = tf.train.shuffle_batch([label, data], batch_size=num,capacity=10000,min_after_dequeue=200, num_threads=5,enqueue_many=False)
+    # label_batch,data_batch = tf.train.batch([label, data], batch_size=num,capacity=10000, num_threads=5)
     coord=tf.train.Coordinator()
     threads= tf.train.start_queue_runners(sess=sess,coord=coord)
     
     data ,label = sess.run([data_batch,label_batch])
+
+    # print(label_batch)
+    # print(data_batch)
+    # print(np.reshape(np.array(data[0]),[256,60]))
+    # print(np.reshape(np.array(data[1]),[256,60]))
+    # for a in data[0]:
+    #     print(a)
+    # for a in data[1]:
+    #     print(a)
+    
+    # for la in  label:
+    #     print(la)
     # print(np.array(data).shape)
     # label = tf.cast(label,tf.int32)
     # label = tf.one_hot(label,4)
     # print(np.array(sess.run(label)))
-    print(np.array(data).shape)
-    print(np.array(label).shape)
-    print(data[0][:10])
-    print(label[0][:10])
+    # print(np.array(data).shape)
+    # print(np.array(label).shape)
+    # print(data[0][:10])
+    # print(label[0][:10])
     return data,label ,file_list_
 
 
 if __name__ == "__main__":
-    # read_csv_('data153.csv')
-    file_list = os.listdir('./test/')
-    i = 0
-    for file in file_list:
-        i+=1
-        file="./test/"+file
-        csv_convert_TFRecord(file,i)
-
-    # TFRecordReader('./TFval/',0)
+    # read_csv_('./val/data2.csv')
+    # file_list = os.listdir('./val/')
+    # i = 0
+    # for file in file_list:
+    #     i+=1
+    #     file="./val/"+file
+    #     csv_convert_TFRecord(file,i)
+    #     print(file)
+    #     read_csv_(file)
+    TFRecordReader('./TFval/',0)

@@ -313,17 +313,18 @@ def write_vector_to_file(file,filename,label_list,data_list,temp):
             if label_list_[num] == 100:
                 label_list_[num] = 0
             else:
-                label_list_[num] = 1
+                label_list_[num] = int(label_list_[num])
+                # label_list_[num] = 1
             # print(con.join(final_data_str[num]))
             f.write(str(label_list_[num])+","+con.join(final_data_str[num])+"\n")
 
     
 if __name__ == "__main__":
 
-    # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/256_1_5_30/train/',0)
-    read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/256_1_5_30/test0/',1)
-    # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/256_1_5_30/val/',2)
+    # read_file_and_get_data('./data/',0)
+    read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/256_1_5_ch_50000/val0/',0)
+    # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/256_1_5_30/test0/',1)
+    # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/256_1_5_1h/256_1_5参差_1_恒参_验证0/',2)
     # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/5test/',3)
     # read_file_and_get_data('/home/wang/Radar数据/Deinterleaving/data/5参差/two/',4)
-    
     

@@ -42,6 +42,7 @@ def TFRecordReader(tfrecord_file,flag):
     # tfrecord_file = ['data153.csv.tfrecords']
     print("开始读文件")
     file_list_ =  os.listdir(tfrecord_file)
+    print(file_list_)
     if flag==0:
         num = len(file_list_)
     else:
@@ -58,8 +59,8 @@ def TFRecordReader(tfrecord_file,flag):
     _,serialized_example_none = reader_none.read(filename_queues)
     
     features = {
-        "data":tf.FixedLenFeature([30*1024],tf.float32),
-        "label":tf.FixedLenFeature([1024],tf.int64)
+        "data":tf.FixedLenFeature([30*256],tf.float32),
+        "label":tf.FixedLenFeature([256],tf.int64)
     }
 
     init = tf.global_variables_initializer()
@@ -82,8 +83,8 @@ def TFRecordReader(tfrecord_file,flag):
     # print(np.array(sess.run(label)))
     print(np.array(data).shape)
     print(np.array(label).shape)
-    print(data[0][:10])
-    print(label[0][:10])
+    # print(data[0][:10])
+    # print(label[0][:10])
     return data,label ,file_list_
 
 
