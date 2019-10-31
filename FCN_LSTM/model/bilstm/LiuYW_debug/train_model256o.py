@@ -91,6 +91,8 @@ init = tf.global_variables_initializer()
 # tf.get_default_graph().finalize() 
 # data,label,_ = TFRecordReader(train_file,0)
 data,label = read_data_return(True,train_file)
+label = tf.cast(label,tf.int32)
+data = tf.cast(data,tf.float32)
 # label = tf.cast(label,tf.int32)
 # label = tf.one_hot(label,num_classes)
 # data  = tf.reshape(data,[5000,time_steps,num_input])
@@ -136,8 +138,6 @@ with tf.Session() as sess:
             # batch_label = next(label_iter)
             batch_data = data[random_index]
             batch_label = label[random_index]
-            batch_label = tf.cast(batch_label,tf.int32)
-            batch_data = tf.cast(batch_data,tf.float32)
             batch_label = sess.run(batch_label)
             batch_data = sess.run(batch_data)
             batch_label = np.reshape(batch_label,[-1,2])
@@ -181,7 +181,7 @@ with tf.Session() as sess:
     
         if Val_acc>temp_acc:
             # temp_loss = Val_loss
-            tf.train.Saver().save(sess,model_file+'model')
+            tf.train.Saver().save(sess,model_file+'model',write_meta_graph=False)
         else:
             pass
         print("validation acc"+"{:.4f}".format(Val_acc)+"validation loss"+"{:.4f}".format(Val_loss)) 
