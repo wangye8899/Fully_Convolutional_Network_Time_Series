@@ -4,6 +4,7 @@ import tensorflow as tf
 import os
 import configparser
 file = 'parameter_256_3_5.ini'
+# 读配置文件，拿到实验所需的参数
 def read_config(file):
     cf = configparser.ConfigParser()
     cf.read(file)
@@ -54,11 +55,14 @@ def read_data_return(is_training,file):
     all_data = np.reshape(np.array(all_data),[len(file_list),time_steps,num_input])
     all_label = np.reshape(np.array(all_label),[len(file_list),time_steps])
     data = all_data
+    # 对label进行onehot编码
     label = tf.one_hot(all_label,num_classes)
     
     # print(dataset.output_types)
     # print(dataset.output_shapes)
+    # 通过is_training来判断是不是训练集数据
     if is_training:
+        # 如果是训练集数据
         # dataset = tf.data.Dataset.from_tensor_slices((data,label))
         # dataset = dataset.shuffle(buffer_size=1000).batch(256).repeat(10000)
         # print(dataset.output_shapes)
@@ -74,6 +78,7 @@ def read_data_return(is_training,file):
         
         
     else:
+        # 如果是验证集或者测试集数据
         sess = tf.Session()
         data = np.reshape(all_data,[-1,time_steps,num_input])
         label = sess.run(label)
@@ -86,6 +91,7 @@ def read_data_return(is_training,file):
     #     print(sess.run(label_).shape)
     
 
+# 这个方法是为了不使用tensorflow的封装方法，我自己写的一个，随机化数据的。不用看
 def shuffle_data(data,label):
     # 同时对data、label按照同种顺序进行了shuffle
     print("数据读取完毕，shuffle数据中。。。。")

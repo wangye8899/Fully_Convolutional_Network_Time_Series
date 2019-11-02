@@ -5,10 +5,16 @@ from tensorflow.python.ops.rnn import bidirectional_dynamic_rnn
 class model_:
     def __init__(self,x,num_hiddens,weights,biases,batch_size):
         # self.x = tf.unstack(x,256,1)
+        # 初始化构建模型所需要的参数
+        # x为输入的信号数据
         self.x = x 
+        # LSTM每层的隐藏单元数
         self.num_hiddens = num_hiddens
+        # 权重
         self.weights = weights
+        # 偏置
         self.biases = biases
+        # batch_size
         self.batch_size = batch_size
 
 
@@ -62,15 +68,21 @@ class model_:
         '''
         模型3.0 在模型1.0的基础上，将三层lstm改为三层双向lstm，看看在256_1_5的数据下，是否有提升。
         '''
-        
+        # 获得输入的信号数据
         input_ = self.x
+        # 对输入的数据进行BatchNormalization，更利于模型拟合数据
         input_ = tf.keras.layers.BatchNormalization()(input_)
+        # for循环3次相当于构建3层双向循环神经网络
         for _ in range(3):
             with tf.variable_scope(None, default_name="bidirectional-rnn"):
+                # 生成前向传播的层
                 fw_lstm_cell = contrib.rnn.LSTMCell(self.num_hiddens,initializer=tf.initializers.orthogonal(),activation=tf.nn.tanh)
+                # 生成反向传播的层
                 bw_lstm_cell = contrib.rnn.LSTMCell(self.num_hiddens,initializer=tf.initializers.orthogonal(),activation=tf.nn.tanh)
                 # 目前均不加Dropout层
+                # 执行bilstm
                 outputs,state = tf.nn.bidirectional_dynamic_rnn(fw_lstm_cell,bw_lstm_cell,input_,dtype=tf.float32)
+                # 连接操作，将前向层的输出和反向层的数据，在2的维度上进行连接，必须考虑两个层的输出
                 input_ = tf.concat(outputs,2) 
 
         #此时3层BLSTM输出的形状为 [?,256,256]

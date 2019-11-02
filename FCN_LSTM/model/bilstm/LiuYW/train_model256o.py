@@ -12,6 +12,7 @@ import sklearn as sk
 # import matplotlib
 # matplotlib.use('Agg')
 # import matplotlib.pyplot as plt
+# 以下两段代码，是禁用gpu
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 # 读取配置文件
@@ -44,7 +45,10 @@ def read_config(file):
 
 # 返回值
 num_hidden,strides,num_channels,num_input,learning_rate,train_file,epoch_num,training_steps,batch_size ,display_step,num_classes,Is_Vali,val_file,plot_train_step,model_file,time_steps= read_config(file)
+
+# 参数初始化
 init = tf.keras.initializers.he_uniform()
+# 以字典的形式保存参数
 weights={
     # init = tf.initializers.he_uniform()
     'conv1':tf.Variable(tf.random_normal([7,1,128])),
@@ -67,6 +71,7 @@ logits = model_.modeling()
 prediction = tf.nn.softmax(logits)
 
 # 计算损失
+# 此处的学习率是个变量，为了能够在训练的过程中，可以动态设置学习率参数
 lr = tf.Variable(0.001,dtype=tf.float32)
 loss_op = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=logits,labels=Y)) 
 # 定义优化函数
@@ -90,11 +95,17 @@ sess = tf.Session()
 init = tf.global_variables_initializer()
 # tf.get_default_graph().finalize() 
 # data,label,_ = TFRecordReader(train_file,0)
+# 读训练集数据
 data,label = read_data_return(True,train_file)
+label = tf.cast(label,tf.int32)
+data = tf.cast(data,tf.float32)
+data = sess.run(data)
+label = sess.run(label)
 # label = tf.cast(label,tf.int32)
 # label = tf.one_hot(label,num_classes)
 # data  = tf.reshape(data,[5000,time_steps,num_input])
 # val_data , val_label,_ = TFRecordReader(val_file,0)
+# 读验证集数据
 val_data ,val_label = read_data_return(False,val_file)
 val_data = val_data[:20]
 val_label = val_label[:20]
@@ -121,6 +132,7 @@ with tf.Session() as sess:
 
     for epoch in range(epoch_num):
         print("Epoch"+str(epoch))
+        # 动态设置学习率
         if epoch==100:
             sess.run(tf.assign(lr,lr/10))
         elif epoch ==250:
@@ -136,10 +148,6 @@ with tf.Session() as sess:
             # batch_label = next(label_iter)
             batch_data = data[random_index]
             batch_label = label[random_index]
-            batch_label = tf.cast(batch_label,tf.int32)
-            batch_data = tf.cast(batch_data,tf.float32)
-            batch_label = sess.run(batch_label)
-            batch_data = sess.run(batch_data)
             batch_label = np.reshape(batch_label,[-1,2])
             # batch_data  = np.reshape(batch_data,[batch_size,time_steps,num_input])
             # batch_label = np.reshape(batch_label,[batch_size*time_steps,num_classes])
@@ -181,7 +189,7 @@ with tf.Session() as sess:
     
         if Val_acc>temp_acc:
             # temp_loss = Val_loss
-            tf.train.Saver().save(sess,model_file+'model')
+            tf.train.Saver().save(sess,model_file+'model',write_meta_graph=False)
         else:
             pass
         print("validation acc"+"{:.4f}".format(Val_acc)+"validation loss"+"{:.4f}".format(Val_loss)) 

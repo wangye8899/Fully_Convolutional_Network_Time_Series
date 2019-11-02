@@ -129,7 +129,7 @@ class model_:
         模型4.0 双向lstm+lstm，当前点信息加全文信息学习
         '''
         # 首先是三层双向循环神经网络，用作encoder编码器，拿到最终的outputs和hidden
-        '''
+        
         # init = tf.random_normal()
         input_x = self.x
         for _ in range(3):
@@ -180,4 +180,4 @@ class model_:
         attention_lstm_output = tf.reshape(attention_lstm_output,[-1,256])
         return tf.matmul(attention_lstm_output,self.weights['out'])+self.biases['out']
 
-        '''
+        
